@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAssignment | Arabic Form | CodeRush</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/form.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+</head>
+<body>
+    <header id="header">
+        <div class="logo"><a href="#" class="logo-link"><img id="header-img" src="assets/images/duwalamit-logos_transparent.png" alt="duwalamit logo"></a></div>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav id="nav-bar" class="nav-bar">
+            
+            <ul>
+                <li><a href="index.html" class="nav-link">Image Slider</a></li>
+                <li><a href="arabic.html" class="nav-link active">Arabic Form</a></li>
+                <li><a href="news-article.html" class="nav-link">News Article</a></li>
+                <li><a href="blogs-grid.html" class="nav-link">Blogs Grid</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <h1>Registration Form</h1>
+    <p>يرجى ملء هذا النموذج بالمعلومات المطلوبة</p>
+    <form action="" lang="ar" dir="rtl" method="post">
+        <fieldset>
+            <label for="first-name">أدخل اسمك الأول: <input id="first-name" name="first-name" type="text" required /></label>
+            <label for="last-name">أدخل اسمك الأخير: <input id="last-name" name="last-name" type="text" required /></label>
+            <label for="email">أدخل عنوان بريدك الالكتروني: <input id="email" name="email" type="email" required /></label>
+            <label for="new-password">أنشئ كلمة مرور جديدة: <input id="new-password" name="new-password" type="password" pattern="[a-z0-9]{8,}" required /></label>
+        </fieldset>
+        <input type="submit" value="إرسال" />
+    </form>
+    <script>
+        hamburger = document.querySelector(".hamburger");
+        hamburger.onclick = function(){
+            navBar = document.querySelector(".nav-bar");
+            navBar.classList.toggle("active")
+        }
+        var slides = document.querySelectorAll('.slide');
+
+        function restrictInputOtherThanArabic($field)
+        {
+          // Arabic characters fall in the Unicode range 0600 - 06FF
+          var arabicCharUnicodeRange = /[\u0600-\u06FF]/;
+
+          $field.bind("keypress", function(event)
+          {
+            var key = event.which;
+            // 0 = numpad
+            // 8 = backspace
+            // 32 = space
+            if (key==8 || key==0 || key === 32)
+            {
+              return true;
+            }
+
+            var str = String.fromCharCode(key);
+            if ( arabicCharUnicodeRange.test(str) )
+            {
+              return true;
+            }
+
+            return false;
+          });
+        }
+
+        jQuery(document).ready(function() {
+            // allow arabic characters only for following fields
+            restrictInputOtherThanArabic($('#first-name'));
+            restrictInputOtherThanArabic($('#last-name'));
+        });
+    </script>
+</body>
+</html>
